@@ -1,6 +1,6 @@
-import 'package:climing/second.dart';
+import 'package:climing/user_info.dart';
 import 'package:flutter/material.dart';
-import 'first.dart';
+import 'ranking.dart';
 import 'home.dart';
 
 void main() {
@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
-  final List<Widget> _children = [Home(), First(), Second()];
+  final List<Widget> _children = [Home(), Rangking(), UserInfo()];
   void _onTap(int index) {
     setState(() {
       _currentIndex = index;
@@ -42,9 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
@@ -56,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: '',
               ),
               new BottomNavigationBarItem(
-                icon: Icon(Icons.upload),
+                icon: Icon(Icons.sports_score_rounded),
                 label: '',
               ),
               new BottomNavigationBarItem(
