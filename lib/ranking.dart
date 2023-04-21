@@ -29,9 +29,6 @@ class RangkingState extends State<Rangking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('List View with Clickable Items'),
-      ),
       body: ListView.builder(
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
