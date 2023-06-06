@@ -17,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         //MaterialPageRoute(builder: (context) => Login()), // 페이지 호출
-        //MaterialPageRoute(builder: (context) => JoinStart()), // 페이지 호출
-        MaterialPageRoute(builder: (context) => MyVideo()), // 페이지 호출
+        MaterialPageRoute(builder: (context) => JoinStart()), // 페이지 호출
+        //MaterialPageRoute(builder: (context) => MyVideo()), // 페이지 호출
       );
     });
   }

@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../style/common_style.dart';
 
-import '../layout/layout.dart';
-
-// 기본 버튼을 위한 위젯입니다.
-// 파라미터 넘기지 않고 DEFAULT 사용하는 경우 전체 화면에서 공통으로 쓰이는 핑크색 버튼으로 적용 → 추후 메인 색상 변경되면 한번에 전부 변경 가능함
-class StaticColor {
-  static const Color pink1 = const Color(0xffFF4AA1); // 현재 메인 색상
-}
-
-class MainButton extends StatelessWidget{
+// OutlinedButton 사용한 공통 버튼용 위젯
+// 버튼 내부 배경색상 없고 겉에 테두리만 존재함
+class LineButton extends StatelessWidget{
   final String label; // 버튼 내에 사용할 문자
   final double fontSize; // 버튼 내에 사용할 문자의 크기
   final Color textColor; // 버튼 내에 사용할 문자의 색상
   final TextAlign textAlign; // 버튼 내에 사용할 문자 위치
-  final IconData? icon; // 버튼에 사용할 아이콘 (필수 사용  X)
+  final IconData icon; // 버튼에 사용할 아이콘 (필수 사용  X)
   final Color backgroundColor; // 버튼 색상
   final Color borderColor; // 버튼 테두리 색상
   final VoidCallback callback; // 버튼 클릭시 실행할 메서드
@@ -28,15 +23,15 @@ class MainButton extends StatelessWidget{
   final double mt; // 기기화면 전체 세로길이 대비 만들고 싶은 위쪽 마진 비율
   final double mb; // 기기화면 전체 세로길이 대비 만들고 싶은 아래쪽 마진 비율
 
-  MainButton({
+  LineButton({
     Key? key,
     this.label = "기본버튼", // 버튼 내부 문자열 필수
     this.fontSize = 15,
-    this.textColor = Colors.white,
+    this.textColor = CommonColor.grey300,
     this.textAlign = TextAlign.center,
-    this.icon,
-    this.backgroundColor = StaticColor.pink1,
-    this.borderColor = StaticColor.pink1,
+    required this.icon,
+    this.backgroundColor = Colors.white,
+    this.borderColor = Colors.white,
     this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
     this.y = 0.07,  // 세로 요청 비율 안넘어오는 경우 기본값
     this.pl = 0,
@@ -64,17 +59,22 @@ class MainButton extends StatelessWidget{
         bottom: screenHeight * this.mb,
         left: 0,
         right: 0,
-      ),
-      child:
-      TextButton(
-        child: Text(this.label, textAlign: this.textAlign, style: TextStyle(fontSize: this.fontSize, color: this.textColor)),
-        onPressed: (){
-          this.callback();
-        },
-        style: TextButton.styleFrom(
-          backgroundColor: this.backgroundColor,
         ),
-      ),
+      child:
+        OutlinedButton.icon(
+          // TODO 폰트 사이즈 기기에 맞도록 스타일 디렉토리에 공통 dart 생성해서 관리하고 사용해야함.
+          label: Text(this.label, textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: this.textColor, fontWeight:FontWeight.bold)),
+          onPressed: (){
+          this.callback();
+          },
+          icon: Icon(this.icon, size: 30), // TODO 아이콘 사이즈도 기기에 맞게 %로 받도록 수정해야함
+          style: OutlinedButton.styleFrom( // border
+          side: BorderSide(color :CommonColor.mainPink),
+          ),
+       ),
     );
   }
 }
+
+
+

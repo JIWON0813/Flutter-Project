@@ -88,7 +88,7 @@ class JoinComplete extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Body(child: childWidgets, height: 640), // head 90 → body 550 +
+              Body(child: childWidgets), // body 100
             ],
           ),
         ),
