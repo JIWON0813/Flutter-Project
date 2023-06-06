@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:climing/video/my_video.dart';
 import 'package:flutter/material.dart';
+import '../join/join_start.dart';
 import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Login()),
+        //MaterialPageRoute(builder: (context) => Login()), // 페이지 호출
+        //MaterialPageRoute(builder: (context) => JoinStart()), // 페이지 호출
+        MaterialPageRoute(builder: (context) => MyVideo()), // 페이지 호출
       );
     });
   }

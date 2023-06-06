@@ -1,5 +1,8 @@
+import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
-import '../User/User.dart';
+import '../User/user.dart';
+import '../widget/button/main_button.dart';
+import '../widget/layout/body.dart';
 import 'detail_set.dart';
 
 // main color : Color(0xffFF4AA1)
@@ -14,6 +17,89 @@ class ProfileSet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageSize = MediaQuery.of(context).size.width / 6;
+    // body에 들어갈 children list
+    List<Widget> childWidgets = [
+      SizedBox(
+        width: 300.0,
+        height: 90.0,
+        child:
+        Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text('아이디' ,style: TextStyle(fontSize: 18, color: Colors.black)),
+              TextFormField(
+                autofocus: true,
+                onChanged: (value){
+                  user.id = value as String;
+                },
+                autovalidateMode: AutovalidateMode.always,
+                validator:(value){
+                },
+                decoration: // 스타일 설정
+                InputDecoration(
+                  prefixIcon: Icon(Icons.person_outline_rounded),
+                  border: OutlineInputBorder(),
+                  hintText: '아이디',
+                ),
+              )
+            ]
+        ),
+      ),
+
+      SizedBox(
+        width: 300.0,
+        height: 200.0,
+        child:
+        Column(
+            mainAxisAlignment: MainAxisAlignment.start, // left
+            children: [
+              Text('프로필사진' ,style: TextStyle(fontSize: 18, color: Colors.black)),
+              Container(
+                constraints: BoxConstraints(
+                  minHeight: imageSize,
+                  minWidth: imageSize,
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.account_circle_rounded,
+                    size: imageSize,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ]
+        ),
+      ),
+      SizedBox(
+        width: 300.0,
+        height: 55.0,
+
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                child: const Text('지금은건너뛰기', style: TextStyle(decoration: TextDecoration.underline,fontSize: 15, color: Colors.grey,fontWeight:FontWeight.bold)), // 색상 바꾸기. TODO 버튼으로 바꾸기
+                onPressed:  () async{
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context)=>DetailSet(user:user)),
+                  );
+                },
+              ),
+            ]
+        ),
+      ),
+      SizedBox(height: 16.0),
+      MainButton(
+        label:'다음',
+        callback: () async{
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context)=>DetailSet(user:user)),
+          );
+        },
+      )
+    ];
 
     return MaterialApp(
       home: Scaffold(
@@ -21,104 +107,8 @@ class ProfileSet extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center, // left
             children: [
-              SizedBox( // header
-                width: 300.0,
-                height: 80,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start, // left
-                    children: [
-                      Text('계정설정', style: TextStyle(fontSize: 24, color: Colors.black)),
-                      Text('계정을 설정합니다', style: TextStyle(fontSize: 15, color: Color(0xff9E9E9E)))]
-                ),
-              ),
-              SizedBox(
-                width: 300.0,
-                height: 90.0,
-                child:
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text('아이디' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-                      TextFormField(
-                        autofocus: true,
-                        onChanged: (value){
-                          user.id = value as String;
-                        },
-                        autovalidateMode: AutovalidateMode.always,
-                        validator:(value){
-                        },
-                        decoration: // 스타일 설정
-                        InputDecoration(
-                          prefixIcon: Icon(Icons.person_outline_rounded),
-                          border: OutlineInputBorder(),
-                          hintText: '아이디',
-                        ),
-                      )
-                    ]
-                ),
-              ),
-
-              SizedBox(
-                width: 300.0,
-                height: 200.0,
-                child:
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.start, // left
-                    children: [
-                      Text('프로필사진' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-                      Container(
-                        constraints: BoxConstraints(
-                          minHeight: imageSize,
-                          minWidth: imageSize,
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.account_circle_rounded,
-                            size: imageSize,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                    ]
-                ),
-              ),
-              SizedBox(
-                width: 300.0,
-                height: 55.0,
-
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        child: const Text('지금은건너뛰기', style: TextStyle(decoration: TextDecoration.underline,fontSize: 15, color: Colors.grey,fontWeight:FontWeight.bold)), // 색상 바꾸기. TODO 버튼으로 바꾸기
-                        onPressed:  () async{
-                          final result = await Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context)=>DetailSet(user:user)),
-                          );
-                        },
-                      ),
-                    ]
-                ),
-              ),
-              SizedBox(height: 16.0),
-              SizedBox(
-                width: 300.0,
-                height: 55.0,
-                child:
-                TextButton(
-                  child: const Text('다음', textAlign: TextAlign.center, style: TextStyle(fontSize: 15,color: Colors.white)),
-                  onPressed:  () async{
-                    final result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context)=>DetailSet(user:user)),
-                    );
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Color(0xffFF4AA1),
-                  ),
-                ),
-              ),
+              Header(menuTitle: '계정설정',menuDetail: '계정을 설정합니다'),
+              Body(child : childWidgets)
             ],
           ),
         ),
