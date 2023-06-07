@@ -1,15 +1,11 @@
-import 'dart:convert';
 import 'package:climing/join/profile_set.dart';
+import 'package:climing/widget/button/line_button.dart';
 import 'package:climing/widget/layout/body.dart';
 import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import '../User/user.dart';
-import '../login/login.dart';
 import '../widget/button/main_button.dart';
-
-// main color : Color(0xffFF4AA1)
-// 진한 회식 Color(0xff5A5A5A)
+import 'package:climing/widget/input/text_input.dart';
 
 // 화면구분 : 회원가입 첫 페이지
 // 주요내용 : 이메일, 비밀번호 입력
@@ -28,59 +24,25 @@ class JoinStart extends StatelessWidget {
 
     // body에 들어갈 children list
     List<Widget> childWidgets = [
-      SizedBox(
-        width: 300.0,
-        height: 70.0,
-        child: TextFormField(
-          autofocus: true,
-          onChanged: (value){
-            email = value as String;
-            print(value);
-          },
-          autovalidateMode: AutovalidateMode.always,
-          validator:(value){
-          },
-          decoration:
-            InputDecoration(
-              prefixIcon: Icon(Icons.mail),
-              border: OutlineInputBorder(),
-              hintText: '이메일',
-          ),
-        ),
+      TextInput(
+        autoFocus: true,
+        callback : (){},
+        icon: Icons.email,
+        hintText: "이메일",
       ),
-      SizedBox(
-        width: 300.0,
-        height: 70.0,
-        child: TextFormField(
-          obscureText: true,
-          autovalidateMode: AutovalidateMode.always,
-          validator:(value){ // 유효성검사
-          },
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.lock),
-            border: OutlineInputBorder(),
-            hintText: '비밀번호',
-          ),
-        ),
+      TextInput(
+        autoFocus: true,
+        callback : (){},
+        icon: Icons.lock,
+        hintText: "비밀번호",
+        obscureText: true,
       ),
-      SizedBox(
-        width: 300.0,
-        height: 70.0,
-        child: TextFormField(
-          obscureText: true,
-          onChanged: (value){
-            password = value as String;
-            print(value);
-          },
-          autovalidateMode: AutovalidateMode.always,
-          validator:(value){ // 유효성검사
-          },
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.lock),
-            border: OutlineInputBorder(),
-            hintText: '비밀번호 확인',
-          ),
-        ),
+      TextInput(
+        autoFocus: true,
+        callback : (){},
+        icon: Icons.lock,
+        hintText: "비밀번호 확인",
+        obscureText: true,
       ),
       // GestureDetectorx button event
       MainButton(
@@ -94,7 +56,6 @@ class JoinStart extends StatelessWidget {
         },
       ),
       SizedBox(
-        width: 300.0,
         height: 60.0,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -102,40 +63,18 @@ class JoinStart extends StatelessWidget {
               Text('또는', textAlign: TextAlign.center, style: TextStyle(fontSize: 15))]
         ),
       ),
-      SizedBox(
-        width: 300.0,
-        height: 55.0,
-        child:
-        OutlinedButton.icon(
-          label: Text('카카오톡으로 가입하기', textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: Color(0xff5A5A5A), fontWeight:FontWeight.bold)),
-          //onPressed: () {},
-          onPressed: _joinWithKakao,
-          icon: Icon(Icons.star, size: 30), // 추후 카카오 아이콘으로 변경 예정
-          style: OutlinedButton.styleFrom( // border
-            side: BorderSide(color :Color(0xffFF4AA1)),
-        ),
-        ),
+      LineButton(
+        label:'카카오톡으로 가입하기',
+        callback: _joinWithKakao,
+        icon: Icons.star_border_outlined,
       ),
-      SizedBox(height: 16.0),
-      SizedBox(
-        width: 300.0,
-        height: 55.0,
-        child:
-        OutlinedButton.icon(
-          label: Text('인스타그램으로 가입하기', textAlign: TextAlign.center, style: TextStyle(fontSize: 15, color: Color(0xff5A5A5A),fontWeight:FontWeight.bold)),
-          //onPressed: () {},
-          onPressed: _joinWithInsta,
-          icon: Icon(Icons.star, size: 30), // 추후 인스타 아이콘으로 변경 예정
-          style: OutlinedButton.styleFrom( // border
-            side: BorderSide(color :Color(0xffFF4AA1)),
-          ),
-        ),
+      LineButton(
+        label:'인스타그램으로 가입하기',
+        callback: _joinWithInsta,
+        icon: Icons.star_border_outlined,
       ),
-      SizedBox(height: 16.0),
+      //TODO 여기 위치 조정해야함
       SizedBox(
-        width: 300.0,
-        height: 55.0,
-
           child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -152,8 +91,10 @@ class JoinStart extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Header(menuTitle: '반가워요!',menuDetail: '처음 오셨나 보네요.\n회원가입 후에 모든 기능을 이용하실 수 있어요.'),
-              Body(child: childWidgets),
+              // 회원가입 첫 페이지에는 Footer가 존재하지 않음.
+              // Header 20, Body 80
+              Header(menuTitle: '반가워요!',menuDetail: '처음 오셨나 보네요.\n회원가입 후에 모든 기능을 이용하실 수 있어요.', y: 0.2),
+              Body(child: childWidgets, y: 0.8),
             ],
           ),
         ),
@@ -161,12 +102,6 @@ class JoinStart extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
 
 
 

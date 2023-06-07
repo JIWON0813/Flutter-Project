@@ -2,6 +2,7 @@ import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
 import '../User/user.dart';
 import '../widget/button/main_button.dart';
+import '../widget/input/text_input.dart';
 import '../widget/layout/body.dart';
 import 'detail_set.dart';
 
@@ -19,33 +20,12 @@ class ProfileSet extends StatelessWidget {
     final imageSize = MediaQuery.of(context).size.width / 6;
     // body에 들어갈 children list
     List<Widget> childWidgets = [
-      SizedBox(
-        width: 300.0,
-        height: 90.0,
-        child:
-        Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text('아이디' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-              TextFormField(
-                autofocus: true,
-                onChanged: (value){
-                  user.id = value as String;
-                },
-                autovalidateMode: AutovalidateMode.always,
-                validator:(value){
-                },
-                decoration: // 스타일 설정
-                InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_rounded),
-                  border: OutlineInputBorder(),
-                  hintText: '아이디',
-                ),
-              )
-            ]
-        ),
+      TextInput(
+        autoFocus: true,
+        callback : (){},
+        icon: Icons.person_outline_rounded,
+        hintText: "아이디",
       ),
-
       SizedBox(
         width: 300.0,
         height: 200.0,
@@ -107,8 +87,8 @@ class ProfileSet extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center, // left
             children: [
-              Header(menuTitle: '계정설정',menuDetail: '계정을 설정합니다'),
-              Body(child : childWidgets)
+              Header(menuTitle: '계정설정',menuDetail: '계정을 설정합니다', y: 0.2),
+              Body(child: childWidgets, y: 0.8),
             ],
           ),
         ),
