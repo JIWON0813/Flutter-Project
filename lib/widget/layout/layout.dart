@@ -1,3 +1,4 @@
+import 'package:climing/style/common_style.dart';
 import 'package:flutter/material.dart';
 // 화면 비율 조정용 위젯
 // 반환 = '기기화면 * 요청비율'로 만든 Container
@@ -29,19 +30,17 @@ class LayoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width; // 기기 전체 가로 길이 → 매번 호출하지 않고, 한 파일에서 관리해도 될듯
-    final screenHeight = MediaQuery.of(context).size.height; // 기기 전체 세로 길이  → 매번 호출하지 않고, 한 파일에서 관리해도 될듯
 
     return Container(
       // 반환할 위젯의 높이 및 너비
-      width: screenWidth * x,// 만들고 싶은 가로 길이 산출
-      height: screenHeight * y,// 만들고 싶은 세로 길이 산출
+      width: ScreenSize.width * x,// 만들고 싶은 가로 길이 산출
+      height: ScreenSize.height * y,// 만들고 싶은 세로 길이 산출
       // padding
       padding:EdgeInsets.only( //
-        top: screenHeight * this.pt,
-        bottom: screenHeight * this.pb,
-        left: screenWidth * this.pl,
-        right: screenWidth * this.pr,
+        top: ScreenSize.height * this.pt,
+        bottom: ScreenSize.height * this.pb,
+        left: ScreenSize.width * this.pl,
+        right: ScreenSize.width * this.pr,
       ),
       color: this.color, // TODO : DIV 확인용 → 얼만큼 사이즈 잡혔는지 확인 (추후 제거)
       child: Column(

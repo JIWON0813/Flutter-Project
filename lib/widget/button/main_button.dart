@@ -1,3 +1,4 @@
+import 'package:climing/style/common_style.dart';
 import 'package:flutter/material.dart';
 
 import '../layout/layout.dart';
@@ -35,8 +36,8 @@ class MainButton extends StatelessWidget{
     this.textColor = Colors.white,
     this.textAlign = TextAlign.center,
     this.icon,
-    this.backgroundColor = StaticColor.pink1,
-    this.borderColor = StaticColor.pink1,
+    this.backgroundColor = CommonColor.mainGreen,
+    this.borderColor = CommonColor.mainGreen,
     this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
     this.y = 0.07,  // 세로 요청 비율 안넘어오는 경우 기본값
     this.pl = 0,

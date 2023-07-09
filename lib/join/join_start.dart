@@ -1,16 +1,21 @@
 import 'package:climing/join/profile_set.dart';
+import 'package:climing/style/common_style.dart';
 import 'package:climing/widget/button/line_button.dart';
 import 'package:climing/widget/layout/body.dart';
 import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
 import '../User/user.dart';
 import '../widget/button/main_button.dart';
-import 'package:climing/widget/input/text_input.dart';
+import 'package:climing/widget/input/text_lined_input.dart';
+
+class JoinStart extends StatefulWidget {
+  @override
+  _JoinStartState createState() => _JoinStartState();
+}
 
 // 화면구분 : 회원가입 첫 페이지
 // 주요내용 : 이메일, 비밀번호 입력
-class JoinStart extends StatelessWidget {
-
+class _JoinStartState extends State<JoinStart> {
   String email = '';
   String password = '';
 
@@ -21,23 +26,26 @@ class JoinStart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
 
     // body에 들어갈 children list
     List<Widget> childWidgets = [
-      TextInput(
+      TextLinedInput(
         autoFocus: true,
         callback : (){},
         icon: Icons.email,
         hintText: "이메일",
       ),
-      TextInput(
+      TextLinedInput(
         autoFocus: true,
         callback : (){},
         icon: Icons.lock,
         hintText: "비밀번호",
         obscureText: true,
       ),
-      TextInput(
+      TextLinedInput(
         autoFocus: true,
         callback : (){},
         icon: Icons.lock,
@@ -60,7 +68,7 @@ class JoinStart extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('또는', textAlign: TextAlign.center, style: TextStyle(fontSize: 15))]
+              Text('또는', textAlign: TextAlign.center, style: TextStyle(fontSize: CommonFont.f16))]
         ),
       ),
       LineButton(
@@ -79,7 +87,7 @@ class JoinStart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
           Text('이미 계정이 있나요? ', style: TextStyle(fontSize: 15, color: Color(0xff5A5A5A),fontWeight:FontWeight.bold)),
-          Text('로그인하기', style: TextStyle(fontSize: 15, color: Color(0xffFF4AA1),fontWeight:FontWeight.bold))], // 색상 바꾸기. TODO 버튼으로 바꾸기
+          Text('로그인하기', style: TextStyle(fontSize: 15, color: CommonColor.mainGreen,fontWeight:FontWeight.bold))], // 색상 바꾸기. TODO 버튼으로 바꾸기
         )
       )
     ];

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../style/common_style.dart';
 
 // 이메일, 아이디 등 텍스트 입력하는 input 상자 생성용 위젯
 
-class TextInput extends StatelessWidget{
+class TextLinedInput extends StatelessWidget{
   final String hintText; // input 상자 내부 placeholder
   final double fontSize; // 버튼 내에 사용할 문자의 크기
   final Color textColor; // 버튼 내에 사용할 문자의 색상
   final TextAlign textAlign; // 버튼 내에 사용할 문자 위치
-  final IconData icon; // 버튼에 사용할 아이콘 (필수 사용  X)
+  final IconData? icon; // 버튼에 사용할 아이콘 (필수 사용  X)
   final Color backgroundColor; // 버튼 색상
   final Color borderColor; // 버튼 테두리 색상
   final VoidCallback callback; // 버튼 클릭시 실행할 메서드
@@ -24,17 +25,20 @@ class TextInput extends StatelessWidget{
   final double mb; // 기기화면 전체 세로길이 대비 만들고 싶은 아래쪽 마진 비율
   final bool autoFocus;
   final bool obscureText;
+  final List<TextInputFormatter>? textInputFormatter; // 텍스트 유효성 검사용
 
-  TextInput({
+
+  TextLinedInput({
     Key? key,
     this.hintText = "placeholder", // input 상자 내부 placeholder
     this.fontSize = 15,
     this.textColor = CommonColor.grey300,
     this.textAlign = TextAlign.center,
-    required this.icon,
+    this.icon,
     this.backgroundColor = Colors.white,
     this.borderColor = Colors.white,
     required this.callback,
+    this.textInputFormatter,
     this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
     this.y = 0.07,  // 세로 요청 비율 안넘어오는 경우 기본값
     this.pl = 0,
@@ -52,14 +56,13 @@ class TextInput extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    final screenWidth = MediaQuery.of(context).size.width; // 기기 전체 가로 길이 → 매번 호출하지 않고, 한 파일에서 관리해도 될듯
     final screenHeight = MediaQuery.of(context).size.height; // 기기 전체 세로 길이  → 매번 호출하지 않고, 한 파일에서 관리해도 될듯
 
     return Container(
       width: double.infinity, // Occupy full width 버튼 가로길이 현재 가능 영역에서 꽉차게 그리기
       margin: EdgeInsets.only(
-        top: screenHeight * this.mt,
-        bottom: screenHeight * this.mb,
+        top: ScreenSize.height * this.mt,
+        bottom: ScreenSize.height * this.mb,
         left: 0,
         right: 0,
       ),
@@ -76,7 +79,7 @@ class TextInput extends StatelessWidget{
         },
         decoration:
           InputDecoration(
-            prefixIcon: Icon(this.icon, size: 30),// TODO 사이즈도 비율에 따라서 변경 필요함
+            prefixIcon: this.icon != null ? Icon(this.icon, size: 30) : null ,// TODO 사이즈도 비율에 따라서 변경 필요함
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(CommonBorder.basic), //8
               borderSide: BorderSide.none, // Remove the default border
