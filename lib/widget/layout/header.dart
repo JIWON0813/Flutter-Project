@@ -1,3 +1,4 @@
+import 'package:climing/style/common_style.dart';
 import 'package:flutter/material.dart';
 
 import 'layout.dart';
@@ -32,9 +33,9 @@ class Header extends StatelessWidget{
 
     List<Widget> child = [
       Padding(padding: EdgeInsets.only(top: 15)),
-      Text(this.menuTitle, style: TextStyle(fontSize: 18, color: Colors.black)),// 현재 화면의 타이틀
+      Text(this.menuTitle, style: TextStyle(fontSize: CommonFont.f24, color: Colors.black)),// 현재 화면의 타이틀
       Padding(padding: EdgeInsets.only(top: 10)),
-      Text(this.menuDetail, style: TextStyle(fontSize: 10, color: Color(0xff9E9E9E)))// 타이틀 관련 상세 내용
+      Text(this.menuDetail, style: TextStyle(fontSize: CommonFont.f16, color: Color(0xff9E9E9E)))// 타이틀 관련 상세 내용
     ];
 
     return Container(

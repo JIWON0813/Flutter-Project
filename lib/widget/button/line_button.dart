@@ -69,7 +69,7 @@ class LineButton extends StatelessWidget{
           },
           icon: Icon(this.icon, size: 30), // TODO 아이콘 사이즈도 기기에 맞게 %로 받도록 수정해야함
           style: OutlinedButton.styleFrom( // border
-          side: BorderSide(color :CommonColor.mainPink),
+          side: BorderSide(color :CommonColor.mainGreen),
           ),
        ),
     );

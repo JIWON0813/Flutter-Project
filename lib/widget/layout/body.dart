@@ -32,7 +32,7 @@ class Body extends StatelessWidget{
         pl : 0.07,
         pr: 0.07,
         innerChild: this.child,
-        color: Colors.black26 // TODO 구조 임시 확인용 (제거 예정)
+        color: Colors.white // TODO 구조 임시 확인용 (색상 변경시 대략적인 body 비율 확인 가능)
       ),
     );
   }
