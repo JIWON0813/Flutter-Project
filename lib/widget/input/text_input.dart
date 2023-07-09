@@ -78,7 +78,7 @@ class TextInput extends StatelessWidget{
           InputDecoration(
             prefixIcon: Icon(this.icon, size: 30),// TODO 사이즈도 비율에 따라서 변경 필요함
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(CommonBorder.br6), //8
+              borderRadius: BorderRadius.circular(CommonBorder.basic), //8
               borderSide: BorderSide.none, // Remove the default border
             ),
             hintText: this.hintText,

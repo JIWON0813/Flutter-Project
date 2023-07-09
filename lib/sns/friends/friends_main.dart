@@ -1,5 +1,8 @@
+import 'package:climing/style/common_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'friends_select.dart';
 
 class FriendsMain extends StatefulWidget{
   _FriendsMainState createState() => _FriendsMainState();
@@ -17,6 +20,24 @@ class _FriendsMainState extends State<FriendsMain> {
       });
     });
   }
+
+  final List<Map<String, dynamic>> data = [
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Title 1',
+      'body': 'Body 1',
+    },
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Title 2',
+      'body': 'Body 2',
+    },
+    {
+      'image': 'https://via.placeholder.com/150',
+      'title': 'Title 3',
+      'body': 'Body 3',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +58,7 @@ class _FriendsMainState extends State<FriendsMain> {
                 filled: true,
                 //fillColor: CupertinoColors.systemGrey5,
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.pinkAccent),
+                  borderSide: BorderSide(color: CommonColor.main),
                   borderRadius: BorderRadius.circular(20), // 원하는 값을 지정하여 둥글게 조절
                 ),
                 prefixIcon: Icon(
@@ -47,6 +68,30 @@ class _FriendsMainState extends State<FriendsMain> {
                 )
             ),
           ),
+          SizedBox(height: 10),
+          Container(
+            width: 400,
+            height: 400,
+            child: ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    FriendsSelect.showCustomDialog(context, '알림', '${index} 팝업입니다.');
+                  },
+                  child: Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(data[index]['image']),
+                      ),
+                      title: Text(data[index]['title']),
+                      subtitle: Text(data[index]['body']),
+                    ),
+                  ),
+                );
+              },
+            ),
+          )
         ],
       ),
     );
