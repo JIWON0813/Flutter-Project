@@ -101,7 +101,10 @@ class _JoinStartState extends State<JoinStart> {
             children: [
               // 회원가입 첫 페이지에는 Footer가 존재하지 않음.
               // Header 20, Body 80
-              Header(menuTitle: '반가워요!',menuDetail: '처음 오셨나 보네요.\n회원가입 후에 모든 기능을 이용하실 수 있어요.', y: 0.2),
+              Header(
+                  titleWidget: TitleWidget(title: '반가워요!'),
+                  subTitleWidget: SubTitleWidget(subTitle: '처음 오셨나 보네요.\n회원가입 후에 모든 기능을 이용하실 수 있어요.'),
+                  y: 0.2),
               Body(child: childWidgets, y: 0.8),
             ],
           ),

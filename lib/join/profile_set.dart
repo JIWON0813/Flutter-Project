@@ -88,7 +88,10 @@ class ProfileSet extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center, // left
             children: [
-              Header(menuTitle: '계정설정',menuDetail: '계정을 설정합니다', y: 0.2),
+              Header(
+                  titleWidget: TitleWidget(title: '계정설정'),
+                  subTitleWidget: SubTitleWidget(subTitle: '계정을 설정합니다'),
+                  y: 0.2),
               Body(child: childWidgets, y: 0.8),
             ],
           ),

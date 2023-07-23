@@ -107,7 +107,10 @@ class _DetailSetState extends State<DetailSet> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Header(menuTitle: '더 자세한 정보',menuDetail: '아이디(변동값주기) 님에 대해서 좀 더 알려 주세요!', y: 0.2),
+              Header(
+                  titleWidget: TitleWidget(title: '더 자세한 정보'),
+                  subTitleWidget: SubTitleWidget(subTitle: '아이디(변동값주기) 님에 대해서 좀 더 알려 주세요'),
+                  y: 0.2),
               Body(child: childWidgets, y: 0.8),
             ],
           ),
