@@ -1,12 +1,9 @@
-import 'package:climing/style/common_style.dart';
 import 'package:flutter/material.dart';
 // 화면 비율 조정용 위젯
-// 반환 = '기기화면 * 요청비율'로 만든 Container
-// PercentageSizedWidget 참고하여 작성함
 
-class LayoutWidget extends StatelessWidget {
+class LayoutWidget extends StatefulWidget {
   final double x; //기기화면 전체 가로 길이 대비 만들고 싶은 가로 길이 비율 ex) 1 → 가로 꽉 채우는 경우
-  final double y; //기화면 전체 높이 길이 대비 만들고 싶은 높이 길이 비율 ex) 0.8
+  final double y; //기기 화면 대비 잡고 싶은 세로 비율 ex) 꽉 채우는
   final List<Widget> innerChild; // 내부 children
   final Color color; // TODO : DIV 확인용 → 얼만큼 사이즈 잡혔는지 확인 (추후 제거)
   final CrossAxisAlignment crossAxisAlignment; // left
@@ -20,7 +17,7 @@ class LayoutWidget extends StatelessWidget {
     this.x = 1,
     this.y = 1,
     required this.innerChild,
-    this.color= Colors.red,
+    this.color = Colors.red,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.pl = 0,
     this.pr = 0,
@@ -29,23 +26,29 @@ class LayoutWidget extends StatelessWidget {
   });
 
   @override
+  _LayoutWidget createState() => _LayoutWidget();
+
+}
+
+class _LayoutWidget extends State<LayoutWidget> {
+  @override
   Widget build(BuildContext context) {
 
     return Container(
       // 반환할 위젯의 높이 및 너비
-      width: ScreenSize.width * x,// 만들고 싶은 가로 길이 산출
-      height: ScreenSize.height * y,// 만들고 싶은 세로 길이 산출
+      width: MediaQuery.of(context).size.width * widget.x,// 만들고 싶은 가로 길이 산출
+      height: MediaQuery.of(context).size.height * widget.y,// 만들고 싶은 세로 길이 산출
       // padding
       padding:EdgeInsets.only( //
-        top: ScreenSize.height * this.pt,
-        bottom: ScreenSize.height * this.pb,
-        left: ScreenSize.width * this.pl,
-        right: ScreenSize.width * this.pr,
+        top: MediaQuery.of(context).size.height * widget.pt,
+        bottom: MediaQuery.of(context).size.height  * widget.pb,
+        left: MediaQuery.of(context).size.width  * widget.pl,
+        right: MediaQuery.of(context).size.width * widget.pr,
       ),
-      color: this.color, // TODO : DIV 확인용 → 얼만큼 사이즈 잡혔는지 확인 (추후 제거)
+      color: widget.color, // TODO : DIV 확인용 → 얼만큼 사이즈 잡혔는지 확인 (추후 제거)
       child: Column(
-          crossAxisAlignment : this.crossAxisAlignment, // left
-          children: this.innerChild
+          crossAxisAlignment : widget.crossAxisAlignment, // left
+          children: widget.innerChild
       ),
     );
   }

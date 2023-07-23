@@ -30,7 +30,7 @@ class _MainEllipseLabel extends State<MainEllipseLabel> {
         right: 8.0,
       ),
       decoration: BoxDecoration(
-        color: widget.success == true ? CommonColor.mainGreen : CommonColor.grey100,
+        color: widget.success == true ? CommonColor.main : CommonColor.grey100,
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: Text(

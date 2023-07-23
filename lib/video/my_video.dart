@@ -47,7 +47,8 @@ class _MyVideoState extends State<MyVideo> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Header(menuTitle: '내 포스팅',menuDetail: '내가 올린 포스팅을 확인해 보세요', y : 0.2),
-              Body(child: childWidgets2, y : 0.7),
+              Body(child: childWidgets, y : 0.7),
+              //Body(child: childWidgets2, y : 0.7),
               // TODO 나머지 0.1 FOOTER
             ],
           ),

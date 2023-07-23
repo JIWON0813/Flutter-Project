@@ -7,7 +7,7 @@ import '../label/main_Ellipse_label.dart';
 
 // MyVideo 페이지에서 하나의 동영상 등록 정보 상자를 정의함
 // 동영상 여러개 등록한 경우 본 위젯을 여러번 재사용
-class MyVideoBox extends StatelessWidget{
+class MyVideoBox extends StatefulWidget {
   // TODO DB 설계가 안나옴 → 하나의 포스팅에 댓글등이 있으므로 포스팅 식별 가능한 키 설정 후 프로퍼티 추가 필요함
   // 하나의 포스팅 BOX는 고유한 키 값을 가져야하며, 해당 키 값 기준으로 댓글, 좋아요 등 다른 테이블과 조인 가능하도록 key 필수 사용
   // final String TODO key블라블라
@@ -37,17 +37,22 @@ class MyVideoBox extends StatelessWidget{
     this.replyCnt = 0,
     this.likeCnt = 0,
     this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
-    this.y = 0.15,  // 세로 요청 비율 안넘어오는 경우 기본값
-  }):super(key:key);
+    this.y = 0.15, // 세로 요청 비율 안넘어오는 경우 기본값
+  }) :super(key: key);
 
+  @override
+  _MyVideoBox createState() => _MyVideoBox();
+}
+
+class _MyVideoBox extends State<MyVideoBox> {
   @override
   Widget build(BuildContext context){
 
     return Container(
-      height: ScreenSize.height * y,
+      height: MediaQuery.of(context).size.height * widget.y,
       margin: EdgeInsets.only(
-        top: ScreenSize.height  * 0.012,
-        bottom: ScreenSize.height  * 0.012,
+        top: MediaQuery.of(context).size.height  * 0.012,
+        bottom: MediaQuery.of(context).size.height  * 0.012,
         left: 0,
         right: 0,
       ),
@@ -76,15 +81,15 @@ class MyVideoBox extends StatelessWidget{
                       mainAxisAlignment:MainAxisAlignment.spaceBetween, // ROW 위젯 가로 간격 동일하게
                       children: [
                         Text( // 날짜
-                            '${this.date.substring(0,4)}년 ${this.date.substring(4,6)}월 ${this.date.substring(6,8)}일',
-                            style: TextStyle(fontSize: CommonFont.f12, color: Color(0xff9E9E9E))),
+                            '${widget.date.substring(0,4)}년 ${widget.date.substring(4,6)}월 ${widget.date.substring(6,8)}일',
+                            style: TextStyle(fontSize: 12, color: Color(0xff9E9E9E))),
                         Text( // 시간. 숫자만 사용하는 경우 문자열 사용한 경우와 정렬이 틀어져서 toString으로 문자 변환
-                            '${this.time.substring(0,2)}:${this.time.substring(2,4)}',
-                            style: TextStyle(fontSize: CommonFont.f12, color: Color(0xff9E9E9E)),
+                            '${widget.time.substring(0,2)}:${widget.time.substring(2,4)}',
+                            style: TextStyle(fontSize: 12, color: Color(0xff9E9E9E)),
                             textAlign: TextAlign.center),
                         MainEllipseLabel( // 회색 타원형 라벨
-                          title: '${this.success ? '성공' : this.completeRatio.toString() + '%'}',
-                          success: this.success,
+                          title: '${widget.success ? '성공' : widget.completeRatio.toString() + '%'}',
+                          success: widget.success,
                         ),
                       ],
                     ),
@@ -93,7 +98,7 @@ class MyVideoBox extends StatelessWidget{
                     child: Row(
                       children: [
                         Text(
-                            this.title
+                            widget.title
                             , style: TextStyle(fontSize: 18, color: Colors.black)
                         )
                       ],
@@ -105,18 +110,18 @@ class MyVideoBox extends StatelessWidget{
                       mainAxisAlignment:MainAxisAlignment.spaceBetween, // ROW 위젯 가로 간격 동일하게
                       children: [
                         GreyEllipseLabel( // 회색 타원형 라벨
-                          title: '${this.level}레벨',
+                          title: '${widget.level}레벨',
                         ),
                         GreyEllipseLabel(
-                          title: this.type, // 운동 유형 TODO DB 설계 후 네이밍 변경 예정
+                          title: widget.type, // 운동 유형 TODO DB 설계 후 네이밍 변경 예정
                         ),
                         IconNumberLabel( // 아이콘 및 숫자 라벨
                             icon : Icons.message_outlined,
-                            cnt : this.replyCnt
+                            cnt : widget.replyCnt
                         ),
                         IconNumberLabel(
                             icon : Icons.heart_broken,
-                            cnt : this.likeCnt
+                            cnt : widget.likeCnt
                         ),
                       ],
                     ),

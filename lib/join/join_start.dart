@@ -68,7 +68,7 @@ class _JoinStartState extends State<JoinStart> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('또는', textAlign: TextAlign.center, style: TextStyle(fontSize: CommonFont.f16))]
+              Text('또는', textAlign: TextAlign.center, style: TextStyle(fontSize: 16))]
         ),
       ),
       LineButton(
@@ -87,7 +87,7 @@ class _JoinStartState extends State<JoinStart> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
           Text('이미 계정이 있나요? ', style: TextStyle(fontSize: 15, color: Color(0xff5A5A5A),fontWeight:FontWeight.bold)),
-          Text('로그인하기', style: TextStyle(fontSize: 15, color: CommonColor.mainGreen,fontWeight:FontWeight.bold))], // 색상 바꾸기. TODO 버튼으로 바꾸기
+          Text('로그인하기', style: TextStyle(fontSize: 15, color: CommonColor.main,fontWeight:FontWeight.bold))], // 색상 바꾸기. TODO 버튼으로 바꾸기
         )
       )
     ];
