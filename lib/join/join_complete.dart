@@ -35,8 +35,6 @@ class JoinComplete extends StatelessWidget {
         ),
       ),
       SizedBox(
-        width: 150.0,
-        height: 150.0,
         child:
         Column(
             mainAxisAlignment: MainAxisAlignment.start, // left
@@ -54,13 +52,11 @@ class JoinComplete extends StatelessWidget {
                   ),
                 ),
               ),
-              Text('아뒤 땡떙' ,style: TextStyle(fontSize: 18, color: Colors.black)),
+              Text('아뒤 땡떙' ,style: TextStyle(fontSize: 17, color: Colors.black)),
             ]
         ),
       ),
       SizedBox( // header
-        width: 300.0,
-        height: 80,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start, // left
             children: [
