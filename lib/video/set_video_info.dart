@@ -3,17 +3,14 @@ import 'package:climing/widget/layout/body.dart';
 import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
 
-// 화면구분 : 내 영상
-// 주요내용 : 영상 업로드 및 삭제 등 영상 관리 기능
-// 특징 : 영상이 있는 경우 등록된 영상 리스트 보여주기, 영상이 없는 경우 "아직 아무것도 업로드 하지 않았네요. 영상을 올려서 공유해 보세요!" 메시지 출력
-// DB 설계 완료되고 동영상 리스트 가져오면, 반복문으로 MyVideoBox 사용할 수 있도록 수정 예정
+// 화면구분 : 업로드 영상 자르기 등 편집 → 기획 확인 후 처리해야함
 
-class MyVideo extends StatefulWidget {
+class SetVideoInfo extends StatefulWidget {
   @override
-  _MyVideoState createState() => _MyVideoState();
+  _SetVideoInfo createState() => _SetVideoInfo();
 }
 
-class _MyVideoState extends State<MyVideo> {
+class _SetVideoInfo extends State<SetVideoInfo> {
   // TODO 스크롤바 처리
   @override
   Widget build(BuildContext context) {
@@ -47,11 +44,9 @@ class _MyVideoState extends State<MyVideo> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Header(
-                  titleWidget: TitleWidget(title: '내 포스팅'),
-                  subTitleWidget: SubTitleWidget(subTitle: '내가 올린 포스팅을 확인해 보세요'),
-                  y : 0.2
-              ),
-              Body(child: childWidgets, y : 0.7),
+                  subTitleWidget: SubTitleWidget(subTitle: '영상 정보 입력', color: Colors.black,),
+                  y : 0.1),
+              Body(child: childWidgets, y : 0.9),
               //Body(child: childWidgets2, y : 0.7),
               // TODO 나머지 0.1 FOOTER
             ],

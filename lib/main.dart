@@ -1,4 +1,5 @@
 import 'package:climing/video/my_video.dart';
+import 'package:climing/video/set_video_info.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'home/home.dart';
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       //home: SplashScreen(),
-      home: MyVideo(),
-      //home: Home(), //SplashScreen(),
+      //home: MyVideo(),
+      //home: SetVideoInfo(),
+      home: Home(), //SplashScreen(),
     );
   }
 }
