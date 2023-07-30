@@ -1,6 +1,7 @@
 import 'package:climing/home/home_item.dart';
 import 'package:climing/home/home_main.dart';
 import 'package:climing/sns/friends/friends_main.dart';
+import 'package:climing/sns/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,17 +14,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   int _currentIndex = 0;
 
-  final List<Widget> _children = [HomeMain(), FriendsMain(), Home(), MyVideo(), UserInfo()];
+  final List<Widget> _children = [HomeMain(), SnsMain(), Home(), MyVideo(), UserInfo()];
 
   void _onTap(int index) {
     setState(() {

@@ -1,21 +1,24 @@
+import 'package:climing/style/common_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../style/common_style.dart';
 
-class FriendsSearch extends StatelessWidget{
-
+class MessageMain extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
-          Text("친구 찾아보기", style: TextStyle(fontSize: 33), textAlign: TextAlign.left),
           SizedBox(height: 10),
-          Text("클비에서 함께 할 친구를 찾아보세요!", style: TextStyle(color: Colors.grey), textAlign: TextAlign.left),
-          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("뭔가 문구 한마디 써있으면...", style: TextStyle(color: Colors.grey, fontSize: 15), textAlign: TextAlign.left),
+              Icon(Icons.add_comment, size: 25,)
+            ],
+          ),
+          SizedBox(height: 15),
           TextField(
             style: TextStyle(fontSize: 15),
             autofocus: true,
@@ -38,4 +41,5 @@ class FriendsSearch extends StatelessWidget{
       ),
     );
   }
+
 }

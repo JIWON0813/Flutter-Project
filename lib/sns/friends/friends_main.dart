@@ -1,3 +1,4 @@
+import 'package:climing/sns/friends/friends_search.dart';
 import 'package:climing/style/common_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +46,23 @@ class _FriendsMainState extends State<FriendsMain> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
-          Text("친구", style: TextStyle(fontSize: 33), textAlign: TextAlign.left),
           SizedBox(height: 10),
-          Text("나의 도전에 함께하는 친구들!", style: TextStyle(color: Colors.grey), textAlign: TextAlign.left),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("나의 도전에 함께하는 친구들!", style: TextStyle(color: Colors.grey, fontSize: 15), textAlign: TextAlign.left),
+              GestureDetector(
+                child: Icon(Icons.person_add_alt_1_outlined, size: 25,),
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FriendsSearch())
+                  );
+                },
+              )
+
+            ],
+          ),
           SizedBox(height: 10),
           TextField(
             style: TextStyle(fontSize: 15),
