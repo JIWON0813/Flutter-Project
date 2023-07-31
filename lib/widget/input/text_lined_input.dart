@@ -11,7 +11,7 @@ class TextLinedInput extends StatefulWidget {
   final TextAlign textAlign; // 버튼 내에 사용할 문자 위치
   final IconData? icon; // 버튼에 사용할 아이콘 (필수 사용  X)
   final Color backgroundColor; // 버튼 색상
-  final Color borderColor; // 버튼 테두리 색상
+  final bool? isBorder; // 버튼 테두리 색상
   final VoidCallback callback; // 버튼 클릭시 실행할 메서드
   final double x; //기기화면 전체 가로 길이 대비 만들고 싶은 가로 길이 비율 ex) 1 → 가로 꽉 채우는 경우
   final double y; //기화면 전체 높이 길이 대비 만들고 싶은 높이 길이 비율 ex) 0.8
@@ -36,7 +36,7 @@ class TextLinedInput extends StatefulWidget {
     this.textAlign = TextAlign.center,
     this.icon,
     this.backgroundColor = Colors.white,
-    this.borderColor = Colors.white,
+    this.isBorder = false,
     required this.callback,
     this.textInputFormatter,
     this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
@@ -84,9 +84,13 @@ class _TextLinedInput extends State<TextLinedInput> {
         decoration:
           InputDecoration(
             prefixIcon: widget.icon != null ? Icon(widget.icon, size: 30) : null ,// TODO 사이즈도 비율에 따라서 변경 필요함
-            border: OutlineInputBorder(
+            enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(CommonBorder.basic), //8
-              borderSide: BorderSide.none, // Remove the default border
+              borderSide: widget.isBorder == true ? BorderSide(color: CommonColor.main, width: 1.0): BorderSide(width: 0.0, style: BorderStyle.none), // Remove the default border
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(CommonBorder.basic), //8
+              borderSide: BorderSide(color: CommonColor.main, width: 1.0), // 포커스 되었을 때 input 상자
             ),
             hintText: widget.hintText,
             filled: true,

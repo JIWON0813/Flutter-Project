@@ -3,8 +3,8 @@ import 'package:climing/widget/layout/body.dart';
 import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
 
-// 화면구분 : 업로드 영상 자르기 등 편집 → 기획 확인 후 처리해야함
-
+// 화면구분 : 영상 업로드 페이지.
+// 영상 자르기, 올리기, 영상 기본정보 입력.
 class SetVideoInfo extends StatefulWidget {
   @override
   _SetVideoInfo createState() => _SetVideoInfo();

@@ -14,7 +14,7 @@ import 'layout.dart';
 class Header extends StatelessWidget{
   final TitleWidget? titleWidget; // 현재 화면의 타이틀
   final SubTitleWidget? subTitleWidget; // 타이틀 관련 상세 내용
-  final IconData? icon; // 혹시 헤더에 아이콘 쓰인다면 사용할 것
+  final IconData? icon2; // 혹시 헤더에 아이콘 쓰인다면 사용할 것
   final double x; //기기화면 전체 가로 길이 대비 만들고 싶은 가로 길이 비율 ex) 1 → 가로 꽉 채우는 경우
   final double y; //기화면 전체 높이 길이 대비 만들고 싶은 높이 길이 비율 ex) 0.8
 
@@ -22,7 +22,7 @@ class Header extends StatelessWidget{
     Key? key,
     this.titleWidget, // 현재 화면의 타이틀
     this.subTitleWidget, // 타이틀 관련 상세 내용
-    this.icon, // 혹시 사용될 아이콘
+    this.icon2, // 혹시 사용될 아이콘
     this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
     this.y = 1  // 세로 요청 비율 안넘어오는 경우 기본값
   }):super(key:key);
@@ -78,22 +78,54 @@ class SubTitleWidget extends StatelessWidget {
   final String? subTitle;
   final double fontSize;
   final Color color;
+  final IconData? icon1; // 혹시 헤더에 아이콘 쓰인다면 사용할 것
+  final IconData? icon2; // 혹시 헤더에 아이콘 쓰인다면 사용할 것
 
   SubTitleWidget({
     this.subTitle,
     this.fontSize = 16,
-    this.color = CommonColor.grey200 // 기본 color
+    this.color = CommonColor.grey200, // 기본 color
+    this.icon1,
+    this.icon2
   });
 
   @override
   Widget build(BuildContext context) {
-    if (subTitle != null) {
-      return Text(
-        subTitle!, // null 허용이라서, null이 아님을 확인시켜줘야함
-        style: TextStyle(fontSize: fontSize, color: color),
+
+    List<Widget> child = [];
+    if (icon1 != null) {
+      child.add(
+          Container(
+            alignment: Alignment.centerRight,
+            child: Icon(this.icon1, color: CommonColor.main),
+          )
       );
-    } else {
-      return SizedBox.shrink(); // null인 경우 빈 상자를 반환하거나 빈 Container를 사용할 수도 있습니다.
     }
+    if (subTitle != null) {
+      child.add(
+          Text(
+            subTitle!, // null 허용이라서, null이 아님을 확인시켜줘야함
+            style: TextStyle(fontSize: fontSize, color: color),
+          )
+      ); // null 허용이라서, null이 아님을 확인시켜줘야함
+    }
+    if (icon2 != null) {
+      child.add(
+        Container(
+          alignment: Alignment.centerRight,
+          child: Icon(this.icon2, color: CommonColor.main),
+        )
+      );
+    }
+    return Container(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: child,
+      ),
+    );
   }
 }
+
+
+
+
