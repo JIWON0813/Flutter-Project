@@ -1,15 +1,19 @@
 import 'dart:convert';
-import 'package:climing/login/oauth.dart';
+import 'package:climing/login/api/oauth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../User/user.dart';
 import '../home/home.dart';
+import '../widget/button/main_button.dart';
+import 'api/check_login.dart';
 
 class Login extends StatelessWidget {
-
   void _loginWithNaver() {
     // 네이버 로그인 기능 호출
   }
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class Login extends StatelessWidget {
                     Icon(Icons.mail),
                     Expanded(
                       child: TextFormField(
+                        controller: email,
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: '이메일 주소',
@@ -45,6 +50,7 @@ class Login extends StatelessWidget {
                     Icon(Icons.lock),
                     Expanded(
                       child: TextFormField(
+                        controller: password,
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: '비밀번호',
@@ -55,41 +61,40 @@ class Login extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 32.0),
-              ElevatedButton(
-                onPressed: () {
-                  // 로그인 버튼이 눌렸을 때 실행할 코드
-                },
-                child: Container(
-                  child : Center(
-                    child: Text('로그인', textAlign: TextAlign.center, style: TextStyle(fontSize: 15)),
-                  ),
-                  // decoration: BoxDecoration(color: Colors.amber),
-                  color: Colors.amber,
-                  height: 50,
-                  width: 300,
+              SizedBox(
+                width: 350,
+                height: 80,
+                child: MainButton(
+                  label: '로그인',
+                  callback: () async {
+                    var user = User(email.text, password.text);
+                    CheckLogin.login(user);
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 32.0),
               ElevatedButton(
                 child: Image.asset('kakao_login2.png', width: 300, height: 50),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent
-                ),
-                onPressed: (){
+                    backgroundColor: Colors.transparent),
+                onPressed: () {
                   OAuth.loginWithKakao().then((value) => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Home()),
-                      )
-                  });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home()),
+                        )
+                      });
                 },
               ),
               SizedBox(height: 16),
               ElevatedButton(
                 child: Image.asset('naver_login2.png', width: 300, height: 50),
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent
-                ),
+                    backgroundColor: Colors.transparent),
                 onPressed: _loginWithNaver,
               ),
             ],
