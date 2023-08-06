@@ -32,7 +32,6 @@ class Login extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         controller: email,
-                        obscureText: true,
                         decoration: InputDecoration(
                           hintText: '이메일 주소',
                         ),
@@ -68,11 +67,46 @@ class Login extends StatelessWidget {
                   label: '로그인',
                   callback: () async {
                     var user = User(email.text, password.text);
-                    CheckLogin.login(user);
-                    final result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Home()),
-                    );
+                    var check = await CheckLogin.login(user);
+                    if(check){
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                      );
+                    }
+                    else{
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)),
+                          //Dialog Main Title
+                          title: Column(
+                            children: <Widget>[
+                              new Text("Dialog Title"),
+                            ],
+                          ),
+                          //
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Dialog Content",
+                              ),
+                            ],
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: new Text("확인"),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        )),
+                      );
+                    }
                   },
                 ),
               ),
