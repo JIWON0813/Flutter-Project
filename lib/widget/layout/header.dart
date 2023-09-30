@@ -47,7 +47,7 @@ class Header extends StatelessWidget{
         pt: 0.05, // 피그마 기준 오른쪽 패딩 1/20
         crossAxisAlignment : CrossAxisAlignment.start, // left
         innerChild: child,
-        color: Colors.black12, // TODO 구조 임시 확인용 (제거 예정)
+        //color: Colors.black12, // TODO 구조 임시 확인용 (제거 예정)
       )
     );
   }

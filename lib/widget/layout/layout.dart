@@ -45,7 +45,7 @@ class _LayoutWidget extends State<LayoutWidget> {
         left: MediaQuery.of(context).size.width  * widget.pl,
         right: MediaQuery.of(context).size.width * widget.pr,
       ),
-      color: widget.color, // TODO : DIV 확인용 → 얼만큼 사이즈 잡혔는지 확인 (추후 제거)
+      //color: widget.color, // TODO : DIV 확인용 → 얼만큼 사이즈 잡혔는지 확인 (추후 제거)
       child: Column(
           crossAxisAlignment : widget.crossAxisAlignment, // left
           children: widget.innerChild

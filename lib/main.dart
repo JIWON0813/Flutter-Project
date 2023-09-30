@@ -1,3 +1,4 @@
+ import 'package:climing/login/login.dart';
 import 'package:climing/video/my_video.dart';
 import 'package:climing/video/set_video_info.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      home: Login(),
       //home: MyVideo(),
       //home: SetVideoInfo(),
       //home: Home(), //SplashScreen(),
