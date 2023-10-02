@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:climing/join/join_start.dart';
 import 'package:climing/login/api/oauth.dart';
 import 'package:climing/widget/layout/body.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -120,7 +122,20 @@ class Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('처음 오셨나요? ', style: TextStyle(fontSize: 15, color: Color(0xff5A5A5A),fontWeight:FontWeight.bold)),
-              Text('가입하기', style: TextStyle(fontSize: 15, color: CommonColor.main,fontWeight:FontWeight.bold))], // 색상 바꾸기. TODO 버튼으로 바꾸기
+              RichText(text: TextSpan(
+                  text: '가입하기',
+                  style: const TextStyle(
+                    color: CommonColor.main,
+                  ),
+                  recognizer: TapGestureRecognizer()..onTap = () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => JoinStart())
+                      );
+                  }
+                )
+              ),
+            ], // 색상 바꾸기. TODO 버튼으로 바꾸기
           )
       )
     ];

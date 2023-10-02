@@ -12,19 +12,19 @@ class CheckLogin {
     var web = kIsWeb;
 
     var body = json.encode(user);
-
-    try{
-      var req = centerUrl + loginPath;
-      var res = await http.post(Uri.parse(req),
-          headers: {"Content-Type": "application/json"}, body: body);
-      if(res.statusCode == 200 && res.body == "true"){
-        return true;
-      }
-      return false;
-    }
-    catch(error){
-      return Future.error(error);
-    }
+    //
+    // try{
+    //   var req = centerUrl + loginPath;
+    //   var res = await http.post(Uri.parse(req),
+    //       headers: {"Content-Type": "application/json"}, body: body);
+    //   if(res.statusCode == 200 && res.body == "true"){
+    //     return true;
+    //   }
+    //   return false;
+    // }
+    // catch(error){
+    //   return Future.error(error);
+    // }
 
     return true;
   }
