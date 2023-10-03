@@ -1,45 +1,58 @@
-import 'dart:convert';
-import 'package:climing/join/join_start.dart';
 import 'package:climing/login/api/oauth.dart';
+import 'package:climing/login/api/sns_login.dart';
+import 'package:climing/widget/input/my_input.dart';
 import 'package:climing/widget/layout/body.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import '../User/user.dart';
+import '../join/join_start.dart';
+import '../user/member.dart';
 import '../home/home.dart';
 import '../style/common_style.dart';
-import '../widget/button/line_button.dart';
 import '../widget/button/main_button.dart';
-import '../widget/input/text_lined_input.dart';
+import '../widget/button/my_btn.dart';
+import '../widget/input/my_input.dart';
 import '../widget/layout/header.dart';
 import 'api/check_login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class Login extends StatelessWidget {
-  void _loginWithGoogle() {
-    // 구글 로그인 기능 호출
-  }
+// 로그인 화면
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+
+  final _authentication = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+  String userName = '';
+  String userEmail = '';
+  String userPassword = '';
+
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
-
-    final screenWidth = MediaQuery.of(context).size.width;
+    //FirebaseAuth.instance.authStateChanges()
     final screenHeight = MediaQuery.of(context).size.height;
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
 
     // body에 들어갈 children list
     List<Widget> childWidgets = [
-      TextLinedInput(
+      MyInput(
         autoFocus: true,
-        callback : (){},
+        onChangedCallback : (value) {
+          setState(() {
+            this.userEmail = value;
+            print(this.userEmail);
+          });
+        },
         icon: Icons.email,
         hintText: "이메일 주소",
       ),
-      TextLinedInput(
+      MyInput(
         autoFocus: true,
-        callback : (){},
         icon: Icons.lock,
         hintText: "비밀번호",
         obscureText: true,
@@ -48,7 +61,7 @@ class Login extends StatelessWidget {
       MainButton(
         label:'로그인',
         callback: () async {
-          var user = User(email.text, password.text);
+          var user = Member(email.text, password.text);
           var check = await CheckLogin.login(user);
           if(check){
             await Navigator.push(
@@ -92,15 +105,16 @@ class Login extends StatelessWidget {
         },
       ),
       SizedBox(
-        height: 60.0,
+        height: screenHeight * 0.07,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('또는', textAlign: TextAlign.center, style: TextStyle(fontSize: 16))]
         ),
       ),
-      LineButton(
-        label:'카카오톡으로 로그인',
+      MyBtn(
+        label:'Kakao 로그인',
+        backgroundColor: Color(0xffFEE500),
         callback : (){
           OAuth.loginWithKakao().then((value) => {
             Navigator.push(
@@ -109,14 +123,28 @@ class Login extends StatelessWidget {
             )
           });
         },
-        icon: Icons.star_border_outlined,
+        icon: Icons.apple,
+        hasBorder: false,
+        //image: Image.asset("testest.png"), 이미지 여기에 넣기
       ),
-      LineButton(
-        label:'구글 로그인',
-        callback: _loginWithGoogle,
-        icon: Icons.star_border_outlined,
+
+      MyBtn(
+        label:'Google 로그인',
+        backgroundColor: Colors.white,
+        callback: SnsLogin.withGoogle,
+        icon: Icons.apple,
+        hasBorder: false,
+        //image: Image.asset("testest.png"), 구글 이미지
       ),
-      //TODO 여기 위치 조정해야함
+      MyBtn(
+        label:'Apple 로그인',
+        backgroundColor: Colors.black,
+        callback: SnsLogin.withApple,
+        icon: Icons.apple,
+        hasBorder: false,
+        //image: Image.asset("testest.png"), 애플 이미지
+      ),
+
       SizedBox(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -128,14 +156,14 @@ class Login extends StatelessWidget {
                     color: CommonColor.main,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = () {
-                      Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => JoinStart())
-                      );
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => JoinStart())
+                    );
                   }
-                )
+              )
               ),
-            ], // 색상 바꾸기. TODO 버튼으로 바꾸기
+            ],
           )
       )
     ];

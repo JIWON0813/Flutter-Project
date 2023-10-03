@@ -1,8 +1,9 @@
+import 'package:climing/widget/input/my_input.dart';
 import 'package:climing/widget/layout/body.dart';
 import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
 import '../style/common_style.dart';
-import '../widget/input/text_lined_input.dart';
+import '../widget/input/my_input.dart';
 
 // 화면구분 : 영상 업로드 페이지.
 // 영상 기본정보 입력. 영상 업로드 페이지 호출 등
@@ -36,33 +37,29 @@ class _UploadVideoState extends State<UploadVideo> {
               //),
             ),
             Text('위치' ,textAlign: TextAlign.left, style: TextStyle(fontSize: 18, color: Colors.black)),
-            TextLinedInput(
+            MyInput(
               autoFocus: false,
-              callback : (){},
               icon: Icons.place_outlined,
               isBorder: true, // 테두리 기본 색상 넣어줄지
               hintText: "위치 정보를 입력해주세요",
             ),
             Text('문제' ,textAlign: TextAlign.left, style: TextStyle(fontSize: 18, color: Colors.black)),
-            TextLinedInput(
+            MyInput(
               autoFocus: false,
-              callback : (){},
               icon: Icons.flag,
               isBorder: true, // 테두리 기본 색상 넣어줄지
               hintText: "볼드-난이도",
             ),
             Text('유형' ,textAlign: TextAlign.left, style: TextStyle(fontSize: 18, color: Colors.black)),
-            TextLinedInput(
+            MyInput(
               autoFocus: false,
-              callback : (){},
               icon: Icons.filter_center_focus_rounded,
               isBorder: true, // 테두리 기본 색상 넣어줄지
               hintText: "유형 정보를 입력해 주세요",
             ),
             Text('진행도' ,textAlign: TextAlign.left, style: TextStyle(fontSize: 18, color: Colors.black)),
-            TextLinedInput(
+            MyInput(
               autoFocus: false,
-              callback : (){},
               icon: Icons.incomplete_circle,
               isBorder: true, // 테두리 기본 색상 넣어줄지
               hintText: "진행도를 10 단위로 입력해 주세요",

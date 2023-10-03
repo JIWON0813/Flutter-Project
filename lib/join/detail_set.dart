@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '../User/user.dart';
-import 'package:climing/widget/input/text_lined_input.dart';
+import 'package:climing/widget/input/my_input.dart';
 
 import '../widget/button/main_button.dart';
+import '../widget/input/my_input.dart';
 import 'join_complete.dart';
 // main color : Color(0xffFF4AA1)
 // 진한 회식 Color(0xff5A5A5A)
@@ -58,30 +59,26 @@ class _DetailSetState extends State<DetailSet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('키' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-              TextLinedInput(
+              MyInput(
                 autoFocus: true,
-                callback : (){},
                 textInputFormatter: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
                 hintText: "cm",
               ),
 
               Text('몸무게' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-              TextLinedInput(
+              MyInput(
                 autoFocus: false,
-                callback : (){},
                 textInputFormatter: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
                 hintText: "kg",
               ),
               Text('클라이밍 경력' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-              TextLinedInput(
+              MyInput(
                 autoFocus: false,
-                callback : (){},
                 hintText: "(ex: 3회, 6개월, 2년 등)",
               ),
               Text('주로 활동하는 지역' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-              TextLinedInput(
+              MyInput(
                 autoFocus: false,
-                callback : (){},
                 hintText: "지역 선택 드롭다운 찾아야함",
               ),
 
