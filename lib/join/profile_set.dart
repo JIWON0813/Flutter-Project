@@ -1,8 +1,9 @@
+import 'package:climing/widget/input/my_input.dart';
 import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
 import '../User/user.dart';
 import '../widget/button/main_button.dart';
-import '../widget/input/text_lined_input.dart';
+import '../widget/input/my_input.dart';
 import '../widget/layout/body.dart';
 import 'detail_set.dart';
 
@@ -21,9 +22,8 @@ class ProfileSet extends StatelessWidget {
     // body에 들어갈 children list
     List<Widget> childWidgets = [
       Text('아이디' ,style: TextStyle(fontSize: 18, color: Colors.black)),
-      TextLinedInput(
+      MyInput(
         autoFocus: true,
-        callback : (){},
         icon: Icons.person_outline_rounded,
         hintText: "아이디",
       ),

@@ -1,12 +1,14 @@
 import 'package:climing/join/profile_set.dart';
 import 'package:climing/style/common_style.dart';
-import 'package:climing/widget/button/line_button.dart';
+import 'package:climing/widget/input/my_input.dart';
 import 'package:climing/widget/layout/body.dart';
 import 'package:climing/widget/layout/header.dart';
 import 'package:flutter/material.dart';
 import '../User/user.dart';
 import '../widget/button/main_button.dart';
-import 'package:climing/widget/input/text_lined_input.dart';
+import 'package:climing/widget/input/my_input.dart';
+
+import '../widget/button/my_btn.dart';
 
 class JoinStart extends StatefulWidget {
   @override
@@ -32,22 +34,19 @@ class _JoinStartState extends State<JoinStart> {
 
     // body에 들어갈 children list
     List<Widget> childWidgets = [
-      TextLinedInput(
+      MyInput(
         autoFocus: true,
-        callback : (){},
         icon: Icons.email,
         hintText: "이메일",
       ),
-      TextLinedInput(
+      MyInput(
         autoFocus: true,
-        callback : (){},
         icon: Icons.lock,
         hintText: "비밀번호",
         obscureText: true,
       ),
-      TextLinedInput(
+      MyInput(
         autoFocus: true,
-        callback : (){},
         icon: Icons.lock,
         hintText: "비밀번호 확인",
         obscureText: true,
@@ -71,12 +70,12 @@ class _JoinStartState extends State<JoinStart> {
               Text('또는', textAlign: TextAlign.center, style: TextStyle(fontSize: 16))]
         ),
       ),
-      LineButton(
+      MyBtn(
         label:'카카오톡으로 가입하기',
         callback: _joinWithKakao,
         icon: Icons.star_border_outlined,
       ),
-      LineButton(
+      MyBtn(
         label:'인스타그램으로 가입하기',
         callback: _joinWithInsta,
         icon: Icons.star_border_outlined,

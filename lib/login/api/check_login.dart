@@ -3,12 +3,14 @@ import 'package:climing/User/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 
+import '../../user/member.dart';
+
 class CheckLogin {
   static const String centerUrl = 'http://3.39.206.119:8080';
   static const String url = 'http://127.0.0.1:8080';
   static const String loginPath ='/api/user/login';
 
-  static Future<bool> login(User user) async{
+  static Future<bool> login(Member user) async{
     var web = kIsWeb;
 
     var body = json.encode(user);

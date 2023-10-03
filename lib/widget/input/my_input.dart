@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import '../../style/common_style.dart';
 
 // 이메일, 아이디 등 텍스트 입력하는 input 상자 생성용 위젯
-
-class TextLinedInput extends StatefulWidget {
+class MyInput extends StatefulWidget {
   final String hintText; // input 상자 내부 placeholder
   final double fontSize; // 버튼 내에 사용할 문자의 크기
   final Color textColor; // 버튼 내에 사용할 문자의 색상
@@ -12,23 +11,13 @@ class TextLinedInput extends StatefulWidget {
   final IconData? icon; // 버튼에 사용할 아이콘 (필수 사용  X)
   final Color backgroundColor; // 버튼 색상
   final bool? isBorder; // 버튼 테두리 색상
-  final VoidCallback callback; // 버튼 클릭시 실행할 메서드
-  final double x; //기기화면 전체 가로 길이 대비 만들고 싶은 가로 길이 비율 ex) 1 → 가로 꽉 채우는 경우
-  final double y; //기화면 전체 높이 길이 대비 만들고 싶은 높이 길이 비율 ex) 0.8
-  final double pl; // 기기화면 전체 가로길이 대비 만들고 싶은 내부 패딩 비율 ex) 값 0.05 → 전체 길이 * 0.05 사용해서 실제 왼쪽 패딩 추출
-  final double pr; // 기기화면 전체 가로길이 대비 만들고 싶은 내부 패딩 비율 ex) 값 0 → 전체 길이 * 0 사용해서 실제 오른쪽 패딩 0으로 적용
-  final double pt; // 기기화면 전체 세로길이 대비 만들고 싶은 내부 패딩 비율
-  final double pb; // 기기화면 전체 세로길이 대비 만들고 싶은 내부 패딩 비율
-  final double ml; // 기기화면 전체 가로길이 대비 만들고 싶은 왼쪽 마진 패딩 비율
-  final double mr; // 기기화면 전체 가로길이 대비 만들고 싶은 오른쪽 마진 비율
-  final double mt; // 기기화면 전체 세로길이 대비 만들고 싶은 위쪽 마진 비율
-  final double mb; // 기기화면 전체 세로길이 대비 만들고 싶은 아래쪽 마진 비율
-  final bool autoFocus;
-  final bool obscureText;
+  //final VoidCallback? onChangedCallback; // onChanged 실행 메서드
+  final Function(String)? onChangedCallback; // onChanged 실행 메서드
+  final bool autoFocus; // text 상자 자동 포커스
+  final bool obscureText; // 문자 ***로 보이게
   final List<TextInputFormatter>? textInputFormatter; // 텍스트 유효성 검사용
 
-
-  TextLinedInput({
+  MyInput({
     Key? key,
     this.hintText = "placeholder", // input 상자 내부 placeholder
     this.fontSize = 15,
@@ -37,27 +26,17 @@ class TextLinedInput extends StatefulWidget {
     this.icon,
     this.backgroundColor = Colors.white,
     this.isBorder = false,
-    required this.callback,
+    this.onChangedCallback,
     this.textInputFormatter,
-    this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
-    this.y = 0.07, // 세로 요청 비율 안넘어오는 경우 기본값
-    this.pl = 0,
-    this.pr = 0,
-    this.pt = 0,
-    this.pb = 0,
-    this.ml = 0,
-    this.mr = 0,
-    this.mt = 0.012,
-    this.mb = 0.012,
     this.autoFocus = false,
     this.obscureText = false
   }) :super(key: key);
 
   @override
-  _TextLinedInput createState() => _TextLinedInput();
+  _MyInput createState() => _MyInput();
 }
 
-class _TextLinedInput extends State<TextLinedInput> {
+class _MyInput extends State<MyInput> {
   @override
   Widget build(BuildContext context){
     final screenHeight = MediaQuery.of(context).size.height; // 기기 전체 세로 길이  → 매번 호출하지 않고, 한 파일에서 관리해도 될듯
@@ -65,38 +44,48 @@ class _TextLinedInput extends State<TextLinedInput> {
     return Container(
       width: double.infinity, // Occupy full width 버튼 가로길이 현재 가능 영역에서 꽉차게 그리기
       margin: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * widget.mt,
-        bottom: MediaQuery.of(context).size.height * widget.mb,
+        top: screenHeight * CommonMargin.basic,
+        bottom: screenHeight * CommonMargin.basic,
         left: 0,
         right: 0,
       ),
       child:
       TextFormField(
-        autofocus: widget.autoFocus,
-        obscureText: widget.obscureText,
+        // keyboardType: TextInputType.emailAddress, // @ 존재하는 키패드 열기
+        autofocus: widget.autoFocus, // 자동 focus 줄건지
+        obscureText: widget.obscureText, // input 상자에 ***로 암호화 표시 할건지
         onChanged: (value){
-        // email = value as String;
+          // 입력값 변경 콜백 함수 호출
+          if(widget.onChangedCallback != null){
+            widget.onChangedCallback!(value);
+          }
+          // email = value as String;
           // TODO print(value); 각각의 input 상자 고유 키값(name) 가지고 value 할당하도록 수정 필요
+        },
+        onSaved: (value){
         },
         autovalidateMode: AutovalidateMode.always,
         validator:(value){
+          // if(value!.isEmpty){
+          //   return "email";
+          // }
+          return null;
         },
         decoration:
           InputDecoration(
             prefixIcon: widget.icon != null ? Icon(widget.icon, size: 30) : null ,// TODO 사이즈도 비율에 따라서 변경 필요함
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(CommonBorder.basic), //8
+              borderRadius: BorderRadius.circular(CommonBorder.basic),
               borderSide: widget.isBorder == true ? BorderSide(color: CommonColor.main, width: 1.0): BorderSide(width: 0.0, style: BorderStyle.none), // Remove the default border
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(CommonBorder.basic), //8
+              borderRadius: BorderRadius.circular(CommonBorder.basic),
               borderSide: BorderSide(color: CommonColor.main, width: 1.0), // 포커스 되었을 때 input 상자
             ),
             hintText: widget.hintText,
             filled: true,
             fillColor: CommonColor.grey100, // Set the desired background color,
-            // 왜 나눴는지 궁금하면 ?
-            contentPadding: EdgeInsets.symmetric(vertical: screenHeight * widget.y/2.5), // Adjust the vertical padding → Container 에는  height 안먹힘
+            contentPadding: EdgeInsets.symmetric(vertical: screenHeight * CommonPadding.basic), // Adjust the vertical padding → Container 에는  height 안먹힘
           )
       )
     );

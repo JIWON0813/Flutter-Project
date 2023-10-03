@@ -20,14 +20,6 @@ class MainButton extends StatelessWidget{
   final VoidCallback callback; // 버튼 클릭시 실행할 메서드
   final double x; //기기화면 전체 가로 길이 대비 만들고 싶은 가로 길이 비율 ex) 1 → 가로 꽉 채우는 경우
   final double y; //기화면 전체 높이 길이 대비 만들고 싶은 높이 길이 비율 ex) 0.8
-  final double pl; // 기기화면 전체 가로길이 대비 만들고 싶은 내부 패딩 비율 ex) 값 0.05 → 전체 길이 * 0.05 사용해서 실제 왼쪽 패딩 추출
-  final double pr; // 기기화면 전체 가로길이 대비 만들고 싶은 내부 패딩 비율 ex) 값 0 → 전체 길이 * 0 사용해서 실제 오른쪽 패딩 0으로 적용
-  final double pt; // 기기화면 전체 세로길이 대비 만들고 싶은 내부 패딩 비율
-  final double pb; // 기기화면 전체 세로길이 대비 만들고 싶은 내부 패딩 비율
-  final double ml; // 기기화면 전체 가로길이 대비 만들고 싶은 왼쪽 마진 패딩 비율
-  final double mr; // 기기화면 전체 가로길이 대비 만들고 싶은 오른쪽 마진 비율
-  final double mt; // 기기화면 전체 세로길이 대비 만들고 싶은 위쪽 마진 비율
-  final double mb; // 기기화면 전체 세로길이 대비 만들고 싶은 아래쪽 마진 비율
 
   MainButton({
     Key? key,
@@ -40,14 +32,6 @@ class MainButton extends StatelessWidget{
     this.borderColor = CommonColor.main,
     this.x = 1, // 가로 요청 비율 안넘어오는 경우 기본값
     this.y = 0.07,  // 세로 요청 비율 안넘어오는 경우 기본값
-    this.pl = 0,
-    this.pr = 0,
-    this.pt = 0,
-    this.pb = 0,
-    this.ml = 0,
-    this.mr = 0,
-    this.mt = 0.012,
-    this.mb = 0.012,
     required this.callback
   }):super(key:key);
 
@@ -61,8 +45,8 @@ class MainButton extends StatelessWidget{
       height: screenHeight * y,
       width: double.infinity, // Occupy full width 버튼 가로길이 현재 가능 영역에서 꽉차게 그리기
       margin: EdgeInsets.only(
-        top: screenHeight * this.mt,
-        bottom: screenHeight * this.mb,
+        top: screenHeight * CommonMargin.basic,
+        bottom: screenHeight * CommonMargin.basic,
         left: 0,
         right: 0,
       ),
