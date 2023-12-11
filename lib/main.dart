@@ -15,7 +15,7 @@ void main() async{
   // 설정 > 개인정보 및 보안 > 개발자용 탭 on
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  KakaoSdk.init(nativeAppKey: 'c6028d56198ef7a4ba5723297421e436', javaScriptAppKey: '62a2d2e6d0f684b246f14b2ec2d58fd6');
+  KakaoSdk.init(nativeAppKey: '', javaScriptAppKey: '');
   runApp(MyApp());
 }
 
